@@ -1,0 +1,20 @@
+# Ignore the uploads directory
+uploads/
+
+# Ignore third-party plugins (add specific plugins if needed)
+# plugins/akismet/
+
+# Ignore cache and temp files
+*/cache/
+*/tmp/
+
+# Ignore environment-specific or temporary files
+.DS_Store
+Thumbs.db
+*.log
+*.sql
+*.env
+
+# Ignore vendor and node_modules if using Composer/NPM
+vendor/
+node_modules/
