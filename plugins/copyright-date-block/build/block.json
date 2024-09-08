@@ -8,6 +8,9 @@
   "description": "Display your site's copyright date.",
   "example": {},
   "attributes": {
+    "fallbackCurrentYear": {
+      "type": "string"
+    },
     "showStartingYear": {
       "type": "boolean"
     },
@@ -17,12 +20,13 @@
   },
   "supports": {
     "color": {
-      "background": false,
+      "background": true,
       "text": true
     },
     "html": false,
     "typography": {
-      "fontSize": true
+      "fontSize": true,
+      "textAlign": true
     }
   },
   "textdomain": "copyright-date-block",

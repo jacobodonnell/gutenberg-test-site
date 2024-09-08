@@ -16,8 +16,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__);
 /**
  * Retrieves the translation of text.
  *
@@ -34,6 +36,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /**
  * The edit function describes the structure of your block in the context of the
  * editor. This represents what the editor will render when the block is used.
@@ -47,29 +50,36 @@ function Edit({
   attributes,
   setAttributes
 }) {
-  console.log(attributes);
   const {
+    fallbackCurrentYear,
     showStartingYear,
     startingYear
   } = attributes;
   const currentYear = new Date().getFullYear().toString();
+  (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(() => {
+    if (currentYear !== fallbackCurrentYear) {
+      setAttributes({
+        fallbackCurrentYear: currentYear
+      });
+    }
+  }, [currentYear, fallbackCurrentYear, setAttributes]);
   let displayDate;
   if (showStartingYear && startingYear) {
     displayDate = startingYear + '—' + currentYear;
   } else {
     displayDate = currentYear;
   }
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.InspectorControls, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.InspectorControls, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
         title: "Settings",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
           label: "Show Starting Year",
           checked: !!showStartingYear,
           onChange: () => setAttributes({
             showStartingYear: !showStartingYear
           })
-        }), showStartingYear && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+        }), showStartingYear && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
           label: "Starting year",
           value: startingYear || '',
           onChange: value => setAttributes({
@@ -77,7 +87,7 @@ function Edit({
           })
         })]
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
       ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps)(),
       children: ["\xA9 ", displayDate]
     })]
@@ -106,13 +116,16 @@ function save({
   attributes
 }) {
   const {
+    fallbackCurrentYear,
     showStartingYear,
     startingYear
   } = attributes;
-  const currentYear = new Date().getFullYear().toString();
+  if (!fallbackCurrentYear) {
+    return null;
+  }
   let displayDate;
   if (showStartingYear && startingYear) {
-    displayDate = startingYear + '—' + currentYear;
+    displayDate = startingYear + '—' + fallbackCurrentYear;
   } else {
     displayDate = currentYear;
   }
@@ -121,6 +134,16 @@ function save({
     children: ["\xA9 ", displayDate]
   });
 }
+
+/***/ }),
+
+/***/ "react":
+/*!************************!*\
+  !*** external "React" ***!
+  \************************/
+/***/ ((module) => {
+
+module.exports = window["React"];
 
 /***/ }),
 
@@ -170,7 +193,7 @@ module.exports = window["wp"]["components"];
   \************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/copyright-date-block","version":"0.1.0","title":"Copyright Date Block","category":"widgets","description":"Display your site\'s copyright date.","example":{},"attributes":{"showStartingYear":{"type":"boolean"},"startingYear":{"type":"string"}},"supports":{"color":{"background":false,"text":true},"html":false,"typography":{"fontSize":true}},"textdomain":"copyright-date-block","editorScript":"file:./index.js","render":"file:./render.php"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/copyright-date-block","version":"0.1.0","title":"Copyright Date Block","category":"widgets","description":"Display your site\'s copyright date.","example":{},"attributes":{"fallbackCurrentYear":{"type":"string"},"showStartingYear":{"type":"boolean"},"startingYear":{"type":"string"}},"supports":{"color":{"background":true,"text":true},"html":false,"typography":{"fontSize":true,"textAlign":true}},"textdomain":"copyright-date-block","editorScript":"file:./index.js","render":"file:./render.php"}');
 
 /***/ })
 

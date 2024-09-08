@@ -1,0 +1,20 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "my-blocks/my-test-block",
+  "version": "0.1.0",
+  "title": "My Test Block",
+  "category": "widgets",
+  "icon": "welcome-learn-more",
+  "description": "This is a block for testing out Gutenberg Blocks",
+  "example": {},
+  "supports": {
+    "html": false
+  },
+  "textdomain": "my-test-block",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php",
+  "viewScript": "file:./view.js"
+}
